@@ -1,0 +1,70 @@
+metadata:
+  h_index: 7
+  i10_index: 6
+  last_updated: '2026-09-06'
+  total_citations: 263
+papers:
+  'dOZXFgoAAAAJ:3fE2CSJIrl8C':
+    citations: 0
+    title: 'Multimodal AI-Based 28-Day Mortality Prediction of Pneumonia Patients at ED Discharge: A Multicenter Study'
+    year: 2026
+  'dOZXFgoAAAAJ:MXK_kJrjxJIC':
+    citations: 0
+    title: 'Long-Term Mortality and Treatment Outcomes in Pacemaker-Associated Heart Failure: Insights from a Nationwide Propensity-Matched Study'
+    year: 2026
+  'dOZXFgoAAAAJ:8k81kl-MbHgC':
+    citations: 0
+    title: 'Sex-Specific Association of Drinking Habit and Alcohol Beverage Type with Serum Uric Acid in Health Population'
+    year: 2026
+  'dOZXFgoAAAAJ:0EnyYjriUFMC':
+    citations: 2
+    title: 'Temporal Trends and Prognostic Impact of Pacemaker-Associated Heart Failure: Insights from a Nationwide Cohort Study'
+    year: 2025
+  'dOZXFgoAAAAJ:hqOjcs7Dif8C':
+    citations: 0
+    title: 'Evaluation of Residual Disease After Neoadjuvant Chemotherapy Using Manganese-Enhanced Magnetic Resonance Imaging in an Orthotopic Mouse Model of Breast Cancer'
+    year: 2025
+  'dOZXFgoAAAAJ:YsMSGLbcyi4C':
+    citations: 8
+    title: 'The Inferior Cerebellar Peduncle Sign: A Novel Imaging Marker for Differentiating Multiple System Atrophy Cerebellar Type from Spinocerebellar Ataxia'
+    year: 2025
+  'dOZXFgoAAAAJ:eQOLeE2rZwMC':
+    citations: 3
+    title: 'Prediction of Microsatellite-Stable/Epithelial-to-Mesenchymal Transition Molecular Subtype Gastric Cancer Using CT Radiomics and Clinicopathologic Factors'
+    year: 2025
+  'dOZXFgoAAAAJ:W7OEmFMy1HYC':
+    citations: 25
+    title: 'Development of A Flexible Feature Selection Framework in Radiomics-based Prediction Modeling: Assessment with Four Real-World Datasets'
+    year: 2024
+  'dOZXFgoAAAAJ:Tyk-4Ss8FVUC':
+    citations: 27
+    title: 'Preoperative Prediction of Early Recurrence in Resectable Pancreatic Cancer Integrating Clinical, Radiologic, and CT Radiomics Features'
+    year: 2024
+  'dOZXFgoAAAAJ:zYLM7Y9cAGgC':
+    citations: 6
+    title: "Weight Loss from Diagnosis of Crohn's Disease to One Year Post-Diagnosis Results in Earlier Surgery"
+    year: 2023
+  'dOZXFgoAAAAJ:IjCSPb-OGe4C':
+    citations: 6
+    title: "Stakeholders' Requirements of Artificial Intelligence for Healthcare in Korea"
+    year: 2022
+  'dOZXFgoAAAAJ:qjMakFHDy7sC':
+    citations: 10
+    title: 'Early Postoperative Urinary MCP-1 as a Potential Biomarker Predicting Acute Rejection in Living Donor Kidney Transplantation: A Prospective Cohort Study'
+    year: 2021
+  'dOZXFgoAAAAJ:2osOgNQ5qMEC':
+    citations: 4
+    title: 'Validation of the GenesWell BCT Score in Young Asian Women with HR+/HER2- Early Breast Cancer'
+    year: 2021
+  'dOZXFgoAAAAJ:d1gkVwhDpl0C':
+    citations: 55
+    title: 'Prediction of Cardiac Arrest in the Emergency Department Based on Machine Learning and Sequential Characteristics: Model Development and Retrospective Clinical Validation Study'
+    year: 2020
+  'dOZXFgoAAAAJ:9yKSN-GCB0IC':
+    citations: 11
+    title: 'Predicting Adverse Outcomes for Febrile Patients in the Emergency Department Using Sparse Laboratory Data: Development of a Time Adaptive Model'
+    year: 2020
+  'dOZXFgoAAAAJ:u-x6o8ySG0sC':
+    citations: 104
+    title: 'Comprehensive Clinical and Genetic Characterization of Hyperprogression Based on Volumetry in Advanced Non-Small Cell Lung Cancer Treated With Immune Checkpoint Inhibitor'
+    year: 2019

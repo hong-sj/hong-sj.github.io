@@ -1,0 +1,15 @@
+# for more options, see https://docs.rendercv.com/user_guide/yaml_input_structure/design/
+#
+# NOTE: this file must be passed to `rendercv render` with `--design`. Pointing at
+# it from `settings.render_command.design` in settings.yaml validates (RenderCV
+# checks the file exists) but the values are never applied. See render-cv.yml.
+design:
+  theme: classic
+  page:
+    size: a4
+    show_footer: false
+    show_top_note: false
+  entries:
+    # The default 1cm hyphen-breaks the full degree names ("Bachelor of Sci-ence").
+    # 3.2cm fits the longest of them on one line.
+    degree_width: 3.2cm

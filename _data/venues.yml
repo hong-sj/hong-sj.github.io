@@ -1,0 +1,47 @@
+"Sci Rep":
+  url: https://www.nature.com/srep/
+  color: "#0f7c4a"
+
+"JMIR Med Inform":
+  url: https://medinform.jmir.org/
+  color: "#1a73a8"
+
+"JKMS":
+  url: https://jkms.org/
+  color: "#8a4fbe"
+
+"EHJ Open":
+  url: https://academic.oup.com/ehjopen
+  color: "#c0392b"
+
+"J Clin Med":
+  url: https://www.mdpi.com/journal/jcm
+  color: "#2c7fb8"
+
+"HIR":
+  url: https://www.e-hir.org/
+  color: "#c98a2b"
+
+"Front Oncol":
+  url: https://www.frontiersin.org/journals/oncology
+  color: "#0f7c4a"
+
+"AJNR":
+  url: https://www.ajnr.org/
+  color: "#2c7fb8"
+
+"Eur J Radiol":
+  url: https://www.ejradiology.com/
+  color: "#8a4fbe"
+
+"Cancer Imaging":
+  url: https://cancerimagingjournal.biomedcentral.com/
+  color: "#c0392b"
+
+"J Thorac Oncol":
+  url: https://www.jto.org/
+  color: "#1a73a8"
+
+"IMRI":
+  url: https://www.i-mri.org/
+  color: "#c98a2b"

@@ -1,0 +1,6 @@
+# Optional: map a co-author's bibtex last name to their full name(s)/URL so their
+# name in the publications list can link out to a bio or profile. Empty for now.
+# Example:
+# "kim":
+#   - firstname: ["Kyunga"]
+#     url: https://example.org/kyunga-kim

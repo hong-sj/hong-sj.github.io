@@ -1,0 +1,168 @@
+name: Update Google Scholar Citations
+
+# Google Scholar blocks datacenter IP ranges, so a scheduled run from a GitHub
+# runner is refused far more often than the same request from a laptop (which
+# completes in seconds). The script signals that case with exit code 75, and
+# this workflow downgrades it to a warning while the cached data is still
+# fresh — a transient block is not something to page about. Once the cache
+# passes MAX_CACHE_AGE_DAYS the job fails for real.
+#
+# The durable fix is a ScraperAPI key: add a repository secret named
+# SCRAPER_API_KEY and the script routes through the proxy automatically.
+
+on:
+  schedule:
+    # Deliberately off the top of the hour: :00 slots are the most heavily
+    # queued on Actions, and the runner IPs are correspondingly hot.
+    - cron: "37 2 * * 1" # Monday
+    - cron: "37 2 * * 3" # Wednesday
+    - cron: "37 2 * * 5" # Friday
+  workflow_dispatch:
+
+env:
+  MAX_CACHE_AGE_DAYS: 14
+
+jobs:
+  update-citations:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: |
+          echo "🔧 Installing dependencies..."
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Save current citations.yml hash
+        id: before
+        run: |
+          echo "📦 Checking existing citations.yml hash..."
+          if [ -f _data/citations.yml ]; then
+            sha_before=$(sha256sum _data/citations.yml | awk '{print $1}')
+            echo "sha_before=$sha_before" >> $GITHUB_OUTPUT
+            echo "📝 SHA before: $sha_before"
+          else
+            echo "sha_before=none" >> $GITHUB_OUTPUT
+            echo "📝 No existing citations.yml file found."
+          fi
+
+      - name: Run citation update script
+        id: run_citation_update
+        shell: bash
+        env:
+          SCRAPER_API_KEY: ${{ secrets.SCRAPER_API_KEY }}
+        run: |
+          echo "🚀 Running citation update script..."
+          if [ -z "${SCRAPER_API_KEY}" ]; then
+            echo "::notice::SCRAPER_API_KEY is not set — querying Google Scholar directly, which Actions IPs are often blocked from."
+          fi
+
+          # A blocked attempt burns minutes inside scholarly's own retry loop,
+          # so cap each try well above the ~7s a healthy fetch needs.
+          attempts=3
+          status=1
+          for attempt in $(seq 1 "$attempts"); do
+            echo "── Attempt $attempt of $attempts ──"
+            # `status=$?` must live in the else branch: after a closed `if`
+            # block with no else, $? is the status of the `if` itself (0).
+            if timeout 180 python bin/update_scholar_citations.py; then
+              status=0
+              break
+            else
+              status=$?
+            fi
+            echo "Attempt $attempt exited with status $status."
+            if [ "$attempt" -lt "$attempts" ]; then
+              backoff=$(( attempt * 45 + RANDOM % 30 ))
+              echo "Retrying in ${backoff}s..."
+              sleep "$backoff"
+            fi
+          done
+
+          # timeout(1) reports 124; treat that like the script's own
+          # "Scholar unavailable" code, since it means the fetch hung.
+          if [ "$status" -eq 124 ]; then
+            status=75
+          fi
+
+          if [ "$status" -eq 0 ]; then
+            echo "✅ Citation update succeeded." | tee -a $GITHUB_STEP_SUMMARY
+            exit 0
+          fi
+
+          if [ "$status" -ne 75 ]; then
+            echo "❌ Citation update failed with exit code $status (not a Scholar availability problem)." | tee -a $GITHUB_STEP_SUMMARY
+            exit "$status"
+          fi
+
+          # Scholar was unreachable. Tolerate it only while the cache is fresh.
+          last_updated=$(python -c "import yaml;print((yaml.safe_load(open('_data/citations.yml')) or {}).get('metadata',{}).get('last_updated',''))" 2>/dev/null || echo "")
+          if [ -z "$last_updated" ]; then
+            echo "❌ Google Scholar was unreachable and no cached citation date could be read." | tee -a $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+          if ! cached_epoch=$(date -u -d "$last_updated" +%s 2>/dev/null); then
+            echo "❌ Google Scholar was unreachable and the cached date '$last_updated' could not be parsed." | tee -a $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+          age_days=$(( ( $(date -u +%s) - cached_epoch ) / 86400 ))
+          echo "Cache last updated $last_updated (${age_days} days ago); tolerance is ${MAX_CACHE_AGE_DAYS} days."
+
+          if [ "$age_days" -gt "${MAX_CACHE_AGE_DAYS}" ]; then
+            echo "❌ Google Scholar has been unreachable long enough that the cache is ${age_days} days stale (> ${MAX_CACHE_AGE_DAYS})." | tee -a $GITHUB_STEP_SUMMARY
+            echo "Consider adding a SCRAPER_API_KEY secret, or refresh locally with: python bin/update_scholar_citations.py" | tee -a $GITHUB_STEP_SUMMARY
+            exit 1
+          fi
+
+          echo "::warning::Google Scholar was unreachable; keeping the cached citations from ${last_updated} (${age_days}d old)."
+          echo "⚠️ Google Scholar unreachable — kept cached citations from ${last_updated} (${age_days}d old)." >> $GITHUB_STEP_SUMMARY
+
+      - name: Save new citations.yml hash
+        id: after
+        run: |
+          echo "🔍 Checking updated citations.yml hash..."
+          if [ -f _data/citations.yml ]; then
+            sha_after=$(sha256sum _data/citations.yml | awk '{print $1}')
+            echo "sha_after=$sha_after" >> $GITHUB_OUTPUT
+            echo "📝 SHA after: $sha_after"
+          else
+            echo "sha_after=none" >> $GITHUB_OUTPUT
+            echo "📝 citations.yml was not created or is missing."
+          fi
+
+      - name: Report citations.yml change in summary
+        run: |
+          echo "📋 Comparing citation file hashes..."
+          if [ "${{ steps.before.outputs.sha_before }}" != "${{ steps.after.outputs.sha_after }}" ]; then
+            echo "✅ _data/citations.yml was updated." | tee -a $GITHUB_STEP_SUMMARY
+          else
+            echo "ℹ️ _data/citations.yml was not changed." | tee -a $GITHUB_STEP_SUMMARY
+          fi
+
+      - name: Configure Git
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          echo "🔧 Git configured."
+
+      - name: Commit and push if changed
+        run: |
+          git add _data/citations.yml
+          git diff --staged --quiet || (
+            echo "📤 Committing and pushing changes..."
+            git commit -m "Update Google Scholar citations"
+            git push
+          )

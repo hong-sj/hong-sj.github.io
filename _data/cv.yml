@@ -1,0 +1,144 @@
+cv:
+  name: Sungjun Hong
+  headline: Postdoctoral Fellow
+  email: hsj2864@gmail.com
+  location: New York, NY, USA
+
+  social_networks:
+    - network: GitHub
+      username: hong-sj
+    - network: LinkedIn
+      username: sungjun-hong
+    - network: ORCID
+      username: 0000-0003-2797-238X
+
+  sections:
+    Summary:
+      - Biomedical statistician and data scientist with 8+ years of experience applying statistical
+        and machine learning methods to complex healthcare data. Postdoctoral Fellow in the Division
+        of Gastroenterology & Hepatology at NYU Grossman School of Medicine, with a research
+        background spanning causal inference, predictive modeling, and large-scale clinical data
+        analysis.
+
+    Experience:
+      - company: NYU Grossman School of Medicine, Department of Medicine
+        position: Postdoctoral Fellow, Division of Gastroenterology & Hepatology
+        location: New York, NY
+        start_date: 2026-10
+        end_date: present
+        highlights:
+          - Applying data science, machine learning, and simulation modeling to clinical and population-level questions in gastrointestinal diseases and cancer.
+
+      - company: Samsung Medical Center, Research Institute for Future Medicine
+        position: Team Leader, Medical AI Research Center
+        location: Seoul, South Korea
+        start_date: 2023-09
+        end_date: 2025-02
+
+      - company: Sungkyunkwan University, School of Medicine
+        position: Research Professor (concurrent academic appointment)
+        location: Seoul, South Korea
+        start_date: 2024-09
+        end_date: 2025-02
+
+      - company: Sungkyunkwan University, School of Medicine
+        position: Postdoctoral Researcher (concurrent academic appointment)
+        location: Seoul, South Korea
+        start_date: 2023-09
+        end_date: 2024-08
+
+      - company: Samsung Medical Center, Research Institute for Future Medicine
+        position: Researcher
+        location: Seoul, South Korea
+        start_date: 2017-11
+        end_date: 2023-08
+
+    Education:
+      - institution: Sungkyunkwan University (SAIHST)
+        location: Seoul, South Korea
+        url: https://www.saihst.kr/
+        area: Digital Health
+        degree: Ph.D.
+        start_date: 2018
+        end_date: 2023
+        highlights:
+          - "Advisor: Prof. Kyunga Kim & Prof. Dong Kyung Chang"
+
+      - institution: University of Seoul
+        location: Seoul, South Korea
+        url: https://www.uos.ac.kr/science/main.do?cate_id2=000010063&identified=anonymous
+        area: Statistics
+        degree: M.S.
+        start_date: 2016
+        end_date: 2018
+        highlights:
+          - "Advisor: Prof. Yonghee Lee"
+
+      - institution: University of Suwon
+        location: Hwaseong, South Korea
+        area: Applied Statistics
+        degree: B.S.
+        start_date: 2011
+        end_date: 2015
+        highlights:
+          - "Double Major: B.E. in Economics & Finance"
+
+    Certificates:
+      - name: Advanced Data Analytics Semi-Professional
+        date: 2020-12
+        icon: fa-solid fa-certificate
+
+      - name: SAS Certified Statistical Business Analyst Using SAS 9 - Regression and Modeling
+        date: 2017-03
+        icon: fa-solid fa-certificate
+
+      - name: SAS Certified Advanced Programmer for SAS 9
+        date: 2017-02
+        icon: fa-solid fa-certificate
+
+      - name: SAS Certified Base Programmer for SAS 9
+        date: 2016-11
+        icon: fa-solid fa-certificate
+
+      - name: Computer Specialist in Spreadsheet & Database, Level I
+        date: 2014-08
+        icon: fa-solid fa-certificate
+
+      - name: Survey Analyst, Junior
+        date: 2013-08
+        icon: fa-solid fa-certificate
+
+    Skills:
+      - label: Programming & ML
+        level: Expert
+        icon: fa-solid fa-code
+        details: Python, PyTorch, TensorFlow, Scikit-learn
+
+      - label: Statistics & Analysis
+        level: Expert
+        icon: fa-solid fa-chart-line
+        details: R, Medical Statistics, Survival Analysis, Propensity Score Methods
+
+    Languages:
+      - name: Korean
+        summary: Native speaker
+
+      - name: English
+        summary: Professional working proficiency
+
+    References:
+      - name: Prof. Kyunga Kim
+        icon: fa-solid fa-user
+        summary: Samsung Medical Center; Doctoral advisor at SAIHST, Sungkyunkwan University
+
+      - name: Prof. Mira Kang
+        icon: fa-solid fa-user
+        summary: Samsung Medical Center; SAIHST, Sungkyunkwan University; Research collaborator
+
+      - name: Prof. Won Chul Cha
+        icon: fa-solid fa-user
+        summary: Samsung Medical Center; SAIHST, Sungkyunkwan University; Research collaborator
+
+      - name: Prof. Woo Kyoung Jeong
+        icon: fa-solid fa-user
+        summary: Samsung Medical Center; SAIHST, Sungkyunkwan University; Research collaborator

@@ -1,0 +1,16 @@
+{% comment %}
+  References renderer. The affiliation text is stored in `summary`
+  (RenderCV has no `reference` field); `icon` is web-only and ignored by RenderCV.
+{% endcomment %}
+
+<ul class="card-text font-weight-light list-group list-group-flush">
+  {% for entry in entries %}
+    <li class="list-group-item">
+      {% if entry.icon %}
+        <i class="{{ entry.icon }}"></i>
+      {% endif %}
+      <strong>{{ entry.name }}</strong>
+      <p>{{ entry.summary | markdownify | remove: '<p>' | remove: '</p>' }}</p>
+    </li>
+  {% endfor %}
+</ul>

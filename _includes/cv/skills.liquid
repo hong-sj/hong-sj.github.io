@@ -1,0 +1,28 @@
+{% comment %}
+  Skills renderer for RenderCV OneLineEntry data: `label` + `details`.
+  NormalEntry (name/keywords) validates but drops the keyword list from the
+  rendered PDF. `level` and `icon` are web-only and ignored by RenderCV.
+{% endcomment %}
+
+<div class="card-text font-weight-light">
+  {% for entry in entries %}
+    <div class="skill-item">
+      {% if entry.icon %}
+        <i class="{{ entry.icon }}"></i>
+      {% endif %}
+      <strong>
+        {{- entry.label -}}
+        {%- if entry.level %} ({{ entry.level }}){% endif %}:</strong
+      >
+      {% if entry.details %}
+        {{ entry.details }}
+      {% endif %}
+    </div>
+  {% endfor %}
+</div>
+
+<style>
+  .skill-item {
+    padding: 0.5rem 0;
+  }
+</style>

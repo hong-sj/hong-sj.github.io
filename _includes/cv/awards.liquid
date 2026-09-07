@@ -1,0 +1,78 @@
+{% comment %}
+  Awards renderer for RenderCV NormalEntry data (_data/cv.yml).
+
+  RenderCV has no `awarder` field, so the awarding body is stored in `summary` and
+  the description in `highlights` — that is the only shape that survives into the
+  rendered PDF. Keep this mapping in sync with the Awards section of cv.yml.
+{% endcomment %}
+
+<ul class="card-text font-weight-light list-group list-group-flush">
+  {% for entry in entries %}
+    <li class="list-group-item">
+      <div class="row">
+        {% capture start_date %}
+          {% if entry.date %}{{ entry.date }}{% endif %}
+        {% endcapture %}
+
+        {% if start_date != '' %}
+          <div class="col-xs-2 col-sm-2 col-md-2 text-center date-column">
+            <table class="table-cv">
+              <tbody>
+                <tr>
+                  <td>
+                    <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px">
+                      {{- start_date | split: '-' | slice: 0, 1 | join: '' -}}
+                    </span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="col-xs-10 col-sm-10 col-md-10 mt-2 mt-md-0">
+            {% if entry.url %}
+              <h6 class="title font-weight-bold ml-1 ml-md-4">
+                <a href="{{ entry.url }}">{{ entry.name }}</a>
+              </h6>
+            {% elsif entry.name %}
+              <h6 class="title font-weight-bold ml-1 ml-md-4">{{ entry.name }}</h6>
+            {% endif %}
+
+            {% if entry.summary %}
+              <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">{{ entry.summary }}</h6>
+            {% endif %}
+
+            {% if entry.highlights %}
+              <ul class="ml-1 ml-md-4">
+                {% for highlight in entry.highlights %}
+                  <li>{{ highlight | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        {% else %}
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            {% if entry.url %}
+              <h6 class="title font-weight-bold ml-1 ml-md-4">
+                <a href="{{ entry.url }}">{{ entry.name }}</a>
+              </h6>
+            {% elsif entry.name %}
+              <h6 class="title font-weight-bold ml-1 ml-md-4">{{ entry.name }}</h6>
+            {% endif %}
+
+            {% if entry.summary %}
+              <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem">{{ entry.summary }}</h6>
+            {% endif %}
+
+            {% if entry.highlights %}
+              <ul class="ml-1 ml-md-4">
+                {% for highlight in entry.highlights %}
+                  <li>{{ highlight | markdownify | remove: '<p>' | remove: '</p>' }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+    </li>
+  {% endfor %}
+</ul>
